@@ -2,27 +2,10 @@ class tritonMIDI extends EventTarget {
   #access = null;
   #output = null;
   #input = null;
+  execCounter = 0;
   constructor() {
     super();
     this.#initConnection();
-  }
-
-  changeBank(channel, bank) {
-    if (!this.#output) return;
-
-    const currentMode = 0;
-    const map = BANKS[currentMode];
-    if (!map) throw new Error(`Unknown mode: ${currentMode}`);
-
-    const b = map[bank];
-    if (!b) throw new Error(`Unknown bank: ${bank}`);
-
-    // Send CC0 (MSB)
-    this.#output.send([0xb0 | channel, 0x00, b.msb]);
-    // Send CC32 (LSB)
-    this.#output.send([0xb0 | channel, 0x20, b.lsb]);
-
-    this.changePatchNumber(0, 0);
   }
 
   changePatchNumber(channel, progNumber) {
@@ -31,8 +14,9 @@ class tritonMIDI extends EventTarget {
   }
 
   sendMessage(data) {
+    this.execCounter++;
     if (!this.#output) throw new Error('Error sending data, no output');
-    this.#input.send(data);
+    this.#output.send(data);
   }
 
   async #initConnection() {
@@ -51,10 +35,11 @@ class tritonMIDI extends EventTarget {
       });
 
       // Notify when ready
-      this.dispatchEvent(new Event('ready'));
+      this.dispatchEvent(new CustomEvent('ready'));
     } catch (err) {
       console.error('❌ Error accessing MIDI:', err);
     }
+    this.dispatchEvent(new CustomEvent('stateReady'));
   }
 
   #handleMIDIMessage(message) {

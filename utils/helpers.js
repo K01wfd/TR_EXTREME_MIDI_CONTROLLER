@@ -20,16 +20,10 @@ function genRandomColor() {
 function extractPatchName(data) {
   let text = '';
 
-  const symbols = Array.from({ length: 32 }, (_, i) =>
-    String.fromCharCode(i + 32)
-  );
+  const symbols = Array.from({ length: 32 }, (_, i) => String.fromCharCode(i + 32));
 
-  const upperCase = Array.from({ length: 26 }, (_, i) =>
-    String.fromCharCode(i + 65)
-  );
-  const lowerCase = Array.from({ length: 26 }, (_, i) =>
-    String.fromCharCode(i + 97)
-  );
+  const upperCase = Array.from({ length: 26 }, (_, i) => String.fromCharCode(i + 65));
+  const lowerCase = Array.from({ length: 26 }, (_, i) => String.fromCharCode(i + 97));
   const combined = [...upperCase, ...lowerCase, ...symbols];
 
   const extracted = data.slice(7, 24);
@@ -51,4 +45,13 @@ function extractBankName(data) {
   if (data[1] === 32) {
     return BANKS_NUMBERS_TO_LABEL[data[2]];
   }
+}
+
+function updateModeSection(state) {
+  changeModeButtons.forEach((btn) => {
+    btn.classList.remove('btn-active');
+    if (btn.value === state.modeText) {
+      btn.classList.add('btn-active');
+    }
+  });
 }

@@ -13,17 +13,17 @@ const TRITON_CHANGE_MESSAGES = {
 };
 
 const TRITON_MODES_TO_NUMBERS = {
-  progModeNumber: 2,
-  combiModeNumber: 0,
-  globalModeNumber: 7,
+  program: 2,
+  combination: 0,
+  global: 7,
 };
 const TRITON_NUMBER_TO_MODES = {
-  0: 'Combination',
-  2: 'Program',
-  7: 'Global',
+  0: 'combination',
+  2: 'program',
+  7: 'global',
 };
 
-const BANKS_MESSAGES = {
+const TRITON_BANKS_MESSAGES = {
   0: {
     A: { msb: 0x3f, lsb: 0x00 },
     B: { msb: 0x3f, lsb: 0x01 },
@@ -38,7 +38,7 @@ const BANKS_MESSAGES = {
     M: { msb: 0x3f, lsb: 0x0d },
     N: { msb: 0x3f, lsb: 0x0e },
   },
-  1: {
+  2: {
     A: { msb: 0x3f, lsb: 0x00 },
     B: { msb: 0x3f, lsb: 0x01 },
     C: { msb: 0x3f, lsb: 0x02 },
@@ -55,7 +55,7 @@ const BANKS_MESSAGES = {
   },
 };
 
-const BANKS_NUMBERS_TO_LABEL = {
+const TRITON_BANKS_NUMBERS_TO_LABEL = {
   0: 'A',
   1: 'B',
   2: 'C',
@@ -70,7 +70,7 @@ const BANKS_NUMBERS_TO_LABEL = {
   13: 'M',
   14: 'N',
 };
-const BANKS_LABELS_TO_NUMBERS = {
+const TRITON_BANKS_LABELS_TO_NUMBERS = {
   A: 0,
   B: 1,
   C: 2,

@@ -1,52 +1,36 @@
 trMIDI.addEventListener('newMessage', (e) => {
   const data = e.detail;
-  switch (data[0]) {
-    case 0xb0: {
-      this.dispatchEvent(
-        new CustomEvent('bankChangedOnDevice', { detail: data })
-      );
-      break;
-    }
-    case 0xc0: {
-      this.dispatchEvent(
-        new CustomEvent('patchChangedOnDevice', { detail: data })
-      );
-      break;
-    }
-    default: {
-      console.log('Channel Untagged message');
-      break;
-    }
-  }
-  switch (data[4]) {
-    case 0x42: // reply to mode request
-      this.dispatchEvent(new CustomEvent('modeRequestReply', { detail: data }));
-      break;
+  const bankChange = data[0] === 0xb0;
+  const programChange = data[0] === 0xc0;
+  const modeReplay = data[4] === 0x42;
+  const modeChangedOnDevice = data[4] === 0x4e;
+  const progDataReplay = data[4] === 0x40;
+  const combiDataReplay = data[4] === 0x49;
+  const postProccess = data[4] === 0x6e;
 
-    case 0x4e: // mode change from keyboard switch
-      this.dispatchEvent(
-        new CustomEvent('modeChangedOnDevice', { detail: data })
-      );
-      break;
-
-    case 0x40:
-      this.dispatchEvent(
-        new CustomEvent('currentProgReplay', { detail: data })
-      );
-      break;
-
-    case 0x49:
-      this.dispatchEvent(
-        new CustomEvent('currentCombiReplay', { detail: data })
-      );
-      break;
-
-    case 0x6e:
-      this.dispatchEvent(new CustomEvent('postProcces', { detail: data }));
-      break;
-
-    default:
-      console.log('sysEx Untagged message');
-      break;
+  if (bankChange) {
+    tritonRemoteUpdater.onBankChanged(data);
+    trMIDI.dispatchEvent(new CustomEvent('remoteStateUpdated'));
+  } else if (programChange) {
+    console.log('Program change');
+    console.log(data);
+  } else if (modeReplay) {
+    tritonRemoteUpdater.onModeReqReplay(data);
+    trMIDI.dispatchEvent(new CustomEvent('remoteStateUpdated'));
+  } else if (modeChangedOnDevice) {
+    tritonRemoteUpdater.onModeChanged(data);
+    trMIDI.dispatchEvent(new CustomEvent('remoteStateUpdated'));
+  } else if (progDataReplay) {
+    console.log('Program Data Replay');
+    console.log(data);
+  } else if (combiDataReplay) {
+    console.log('Combi data replay');
+    console.log(data);
+  } else if (postProccess) {
+    console.log('Post proccess');
+    console.log(data);
+  } else {
+    console.log('Unkown Message');
+    console.log(data);
   }
 });

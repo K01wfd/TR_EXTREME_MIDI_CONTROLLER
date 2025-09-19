@@ -10,8 +10,6 @@
     <div class="app">
       <div class="screen">
         <div class="outputs">
-          <div id="output-mode">Initial</div>
-          <div id="output-bank">Initial</div>
           <div id="output-patch-name">Initial</div>
         </div>
       </div>
@@ -23,219 +21,83 @@
             id="change-mode-combi"
             data-id="change-mode-btn"
             style="background-color: rgb(245, 0, 155)"
+            value="combination"
+            ,
           >
             COMBI
           </button>
           <button
             id="change-mode-prog"
-            data-id="change-mode-btn "
+            data-id="change-mode-btn"
             style="background-color: rgb(52, 108, 213)"
+            value="program"
           >
             PROG
           </button>
         </div>
         <div class="transpose">
-          <button
-            id="transpose-"
-            data-id="transpose-btn"
-            style="background-color: rgb(45, 210, 205)"
-          >
-            -
-          </button>
+          <button id="transpose-" data-id="transpose-btn" style="background-color: rgb(45, 210, 205)">-</button>
           <div id="transpose-value">0</div>
-          <button
-            id="transpose+"
-            data-id="transpose-btn"
-            style="background-color: rgb(217, 13, 74)"
-          >
-            +
-          </button>
+          <button id="transpose+" data-id="transpose-btn" style="background-color: rgb(217, 13, 74)">+</button>
         </div>
       </div>
       <!--  -->
       <div class="devider"></div>
       <!--  -->
       <div class="banks">
-        <div class="prog-banks">
-          <button
-            data-index="0"
-            data-label="A"
-            data-id="program-bank-btn"
-            class="btn-active"
-            style="background-color: rgb(52, 249, 65)"
-          >
+        <div class="combi-banks">
+          <button data-index="0" data-label="A" data-id="combination-bank-btn" style="background-color: rgb(78, 97, 202)">
             Bank A</button
-          ><button
-            data-index="1"
-            data-label="B"
-            data-id="program-bank-btn"
-            style="background-color: rgb(119, 135, 38)"
-          >
+          ><button data-index="1" data-label="B" data-id="combination-bank-btn" style="background-color: rgb(203, 50, 42)">
             Bank B</button
-          ><button
-            data-index="2"
-            data-label="C"
-            data-id="program-bank-btn"
-            style="background-color: rgb(85, 112, 175)"
-          >
+          ><button data-index="2" data-label="C" data-id="combination-bank-btn" style="background-color: rgb(72, 172, 10)">
             Bank C</button
-          ><button
-            data-index="3"
-            data-label="D"
-            data-id="program-bank-btn"
-            style="background-color: rgb(245, 0, 155)"
-          >
+          ><button data-index="3" data-label="D" data-id="combination-bank-btn" style="background-color: rgb(51, 107, 76)">
             Bank D</button
-          ><button
-            data-index="4"
-            data-label="E"
-            data-id="program-bank-btn"
-            style="background-color: rgb(52, 108, 213)"
-          >
+          ><button data-index="4" data-label="E" data-id="combination-bank-btn" style="background-color: rgb(20, 159, 61)">
             Bank E</button
-          ><button
-            data-index="5"
-            data-label="F"
-            data-id="program-bank-btn"
-            style="background-color: rgb(201, 116, 94)"
-          >
-            Bank F</button
-          ><button
-            data-index="8"
-            data-label="H"
-            data-id="program-bank-btn"
-            style="background-color: rgb(173, 103, 158)"
-          >
+          ><button data-index="8" data-label="H" data-id="combination-bank-btn" style="background-color: rgb(100, 117, 201)">
             Bank H</button
-          ><button
-            data-index="9"
-            data-label="I"
-            data-id="program-bank-btn"
-            style="background-color: rgb(84, 71, 194)"
-          >
+          ><button data-index="9" data-label="I" data-id="combination-bank-btn" style="background-color: rgb(77, 157, 137)">
             Bank I</button
-          ><button
-            data-index="10"
-            data-label="J"
-            data-id="program-bank-btn"
-            style="background-color: rgb(50, 231, 68)"
-          >
+          ><button data-index="10" data-label="J" data-id="combination-bank-btn" style="background-color: rgb(170, 14, 53)">
             Bank J</button
-          ><button
-            data-index="11"
-            data-label="K"
-            data-id="program-bank-btn"
-            style="background-color: rgb(100, 72, 142)"
-          >
+          ><button data-index="11" data-label="K" data-id="combination-bank-btn" style="background-color: rgb(153, 41, 89)">
             Bank K</button
-          ><button
-            data-index="12"
-            data-label="L"
-            data-id="program-bank-btn"
-            style="background-color: rgb(20, 159, 22)"
-          >
+          ><button data-index="12" data-label="L" data-id="combination-bank-btn" style="background-color: rgb(246, 49, 204)">
             Bank L</button
-          ><button
-            data-index="13"
-            data-label="M"
-            data-id="program-bank-btn"
-            style="background-color: rgb(43, 108, 145)"
-          >
+          ><button data-index="13" data-label="M" data-id="combination-bank-btn" style="background-color: rgb(221, 64, 145)">
             Bank M</button
-          ><button
-            data-index="14"
-            data-label="N"
-            data-id="program-bank-btn"
-            style="background-color: rgb(21, 168, 60)"
-          >
+          ><button data-index="14" data-label="N" data-id="combination-bank-btn" style="background-color: rgb(45, 200, 128)">
             Bank N
           </button>
         </div>
-        <div class="combi-banks">
-          <button
-            data-index="0"
-            data-label="A"
-            data-id="combination-bank-btn"
-            class="btn-active"
-            style="background-color: rgb(78, 97, 202)"
-          >
+        <div class="prog-banks" style="display: none">
+          <button data-index="0" data-label="A" data-id="program-bank-btn" style="background-color: rgb(52, 249, 65)">
             Bank A</button
-          ><button
-            data-index="1"
-            data-label="B"
-            data-id="combination-bank-btn"
-            style="background-color: rgb(203, 50, 42)"
-          >
+          ><button data-index="1" data-label="B" data-id="program-bank-btn" style="background-color: rgb(119, 135, 38)">
             Bank B</button
-          ><button
-            data-index="2"
-            data-label="C"
-            data-id="combination-bank-btn"
-            style="background-color: rgb(95, 225, 14)"
-          >
+          ><button data-index="2" data-label="C" data-id="program-bank-btn" style="background-color: rgb(85, 112, 175)">
             Bank C</button
-          ><button
-            data-index="3"
-            data-label="D"
-            data-id="combination-bank-btn"
-            style="background-color: rgb(51, 107, 76)"
-          >
+          ><button data-index="3" data-label="D" data-id="program-bank-btn" style="background-color: rgb(245, 0, 155)">
             Bank D</button
-          ><button
-            data-index="4"
-            data-label="E"
-            data-id="combination-bank-btn"
-            style="background-color: rgb(20, 159, 61)"
-          >
+          ><button data-index="4" data-label="E" data-id="program-bank-btn" style="background-color: rgb(52, 108, 213)">
             Bank E</button
-          ><button
-            data-index="8"
-            data-label="H"
-            data-id="combination-bank-btn"
-            style="background-color: rgb(100, 117, 201)"
-          >
+          ><button data-index="5" data-label="F" data-id="program-bank-btn" style="background-color: rgb(201, 116, 94)">
+            Bank F</button
+          ><button data-index="8" data-label="H" data-id="program-bank-btn" style="background-color: rgb(173, 103, 158)">
             Bank H</button
-          ><button
-            data-index="9"
-            data-label="I"
-            data-id="combination-bank-btn"
-            style="background-color: rgb(77, 157, 137)"
-          >
+          ><button data-index="9" data-label="I" data-id="program-bank-btn" style="background-color: rgb(84, 71, 194)">
             Bank I</button
-          ><button
-            data-index="10"
-            data-label="J"
-            data-id="combination-bank-btn"
-            style="background-color: rgb(170, 14, 53)"
-          >
+          ><button data-index="10" data-label="J" data-id="program-bank-btn" style="background-color: rgb(50, 231, 68)">
             Bank J</button
-          ><button
-            data-index="11"
-            data-label="K"
-            data-id="combination-bank-btn"
-            style="background-color: rgb(153, 41, 89)"
-          >
+          ><button data-index="11" data-label="K" data-id="program-bank-btn" style="background-color: rgb(100, 72, 142)">
             Bank K</button
-          ><button
-            data-index="12"
-            data-label="L"
-            data-id="combination-bank-btn"
-            style="background-color: rgb(246, 49, 204)"
-          >
+          ><button data-index="12" data-label="L" data-id="program-bank-btn" style="background-color: rgb(20, 159, 22)">
             Bank L</button
-          ><button
-            data-index="13"
-            data-label="M"
-            data-id="combination-bank-btn"
-            style="background-color: rgb(221, 64, 145)"
-          >
+          ><button data-index="13" data-label="M" data-id="program-bank-btn" style="background-color: rgb(43, 108, 145)">
             Bank M</button
-          ><button
-            data-index="14"
-            data-label="N"
-            data-id="combination-bank-btn"
-            style="background-color: rgb(45, 200, 128)"
-          >
+          ><button data-index="14" data-label="N" data-id="program-bank-btn" style="background-color: rgb(21, 168, 60)">
             Bank N
           </button>
         </div>
@@ -244,76 +106,22 @@
       <div class="devider"></div>
       <div class="prog-change-container">
         <div class="change-program-row-1" data-id="row-1">
-          <button
-            value="7"
-            data-id="patch-number-btn-pad"
-            style="background-color: rgb(74, 23, 140)"
-          >
-            7</button
-          ><button
-            value="8"
-            data-id="patch-number-btn-pad"
-            style="background-color: rgb(45, 210, 205)"
-          >
-            8</button
-          ><button
-            value="9"
-            data-id="patch-number-btn-pad"
-            style="background-color: rgb(187, 108, 84)"
-          >
-            9
-          </button>
+          <button value="7" data-id="patch-number-btn-pad" style="background-color: rgb(74, 23, 140)">7</button
+          ><button value="8" data-id="patch-number-btn-pad" style="background-color: rgb(45, 210, 205)">8</button
+          ><button value="9" data-id="patch-number-btn-pad" style="background-color: rgb(187, 108, 84)">9</button>
         </div>
         <div class="change-program-row-2" data-id="row-2">
-          <button
-            value="4"
-            data-id="patch-number-btn-pad"
-            style="background-color: rgb(6, 51, 249)"
-          >
-            4</button
-          ><button
-            value="5"
-            data-id="patch-number-btn-pad"
-            style="background-color: rgb(124, 65, 112)"
-          >
-            5</button
-          ><button
-            value="6"
-            data-id="patch-number-btn-pad"
-            style="background-color: rgb(217, 13, 74)"
-          >
-            6
-          </button>
+          <button value="4" data-id="patch-number-btn-pad" style="background-color: rgb(6, 51, 249)">4</button
+          ><button value="5" data-id="patch-number-btn-pad" style="background-color: rgb(124, 65, 112)">5</button
+          ><button value="6" data-id="patch-number-btn-pad" style="background-color: rgb(217, 13, 74)">6</button>
         </div>
         <div class="change-program-row-3" data-id="row-3">
-          <button
-            value="1"
-            data-id="patch-number-btn-pad"
-            style="background-color: rgb(32, 136, 117)"
-          >
-            1</button
-          ><button
-            value="2"
-            data-id="patch-number-btn-pad"
-            style="background-color: rgb(155, 191, 49)"
-          >
-            2</button
-          ><button
-            value="3"
-            data-id="patch-number-btn-pad"
-            style="background-color: rgb(125, 23, 150)"
-          >
-            3
-          </button>
+          <button value="1" data-id="patch-number-btn-pad" style="background-color: rgb(32, 136, 117)">1</button
+          ><button value="2" data-id="patch-number-btn-pad" style="background-color: rgb(155, 191, 49)">2</button
+          ><button value="3" data-id="patch-number-btn-pad" style="background-color: rgb(125, 23, 150)">3</button>
         </div>
         <div class="change-program-row-4" data-id="row-4">
-          <button
-            value="0"
-            data-id="patch-number-btn-pad"
-            style="background-color: rgb(201, 44, 8)"
-          >
-            0
-          </button>
+          <button value="0" data-id="patch-number-btn-pad" style="background-color: rgb(201, 44, 8)">0</button>
         </div>
       </div>
     </div>
