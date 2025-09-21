@@ -15,6 +15,7 @@ body {
   font-size: 1.4rem;
   line-height: 1.4;
   color: #fdfdfd;
+  position: relative;
 }
 button {
   border: none;
@@ -37,6 +38,20 @@ button:active {
   min-height: 10dvh;
   background-color: rgb(255, 208, 0);
   padding: 1rem;
+  font-size: 3rem;
+}
+.temp-patch-number {
+  display: block;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  background-color: #fdfdfd;
+  box-shadow: 0 0 1rem 0.2rem rgb(197, 161, 0);
+  color: #121212;
+  font-size: 6rem;
+  z-index: 1000;
+  padding: 4rem;
 }
 .outputs {
   display: flex;
@@ -45,10 +60,10 @@ button:active {
   color: #121212;
 }
 #output-patch-name {
-  font-weight: 600;
+  font-weight: 700;
   padding: 0.3rem;
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 3rem;
 }
 .outputs :not(:last-child) {
   outline: 1px dashed #858585;
@@ -106,10 +121,65 @@ button:active {
     }
   }
 }
+.userScale {
+  background-color: #121212;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.2rem;
+  button {
+    background: linear-gradient(to bottom right, rgb(246, 49, 204), rgb(49, 49, 246));
+    color: #fff;
+    padding: 1.4rem;
+    font-size: 2rem;
+  }
+}
 
+.tunning-range {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 1rem;
+  span {
+    font-weight: 600;
+    font-size: 1.8rem;
+  }
+}
+.userScale-top {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  justify-content: center;
+}
+.userScale-top__left,
+.userScale-top__right {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+.userScale-bottom {
+  display: flex;
+  align-items: center;
+  gap: 1.3rem;
+  justify-content: center;
+  button {
+    padding: 1.6rem;
+  }
+}
+
+#toggler {
+  background-color: #fdfdfd;
+  color: #121212;
+  padding: 0.9rem 3rem;
+  margin: 1.5rem 0rem;
+  min-width: 130px;
+  outline: 2px solid #121212;
+  outline-offset: -0.4rem;
+}
 .devider {
   height: 1px;
   width: 100%;
   background-color: #fdfdfd;
-  margin: 2.5rem auto;
+  margin: 2rem auto;
 }

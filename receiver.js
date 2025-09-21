@@ -7,28 +7,30 @@ trMIDI.addEventListener('newMessage', (e) => {
   const progDataReplay = data[4] === 0x40;
   const combiDataReplay = data[4] === 0x49;
   const postProccess = data[4] === 0x6e;
+  const globalDumpReplay = data[4] === 0x51;
 
   if (bankChange) {
     tritonRemoteUpdater.onBankChanged(data);
-    trMIDI.dispatchEvent(new CustomEvent('remoteStateUpdated'));
+    trMIDI.dispatchEvent(new CustomEvent('RBankChangedOnKeyboard'));
   } else if (programChange) {
     console.log('Program change');
     console.log(data);
   } else if (modeReplay) {
     tritonRemoteUpdater.onModeReqReplay(data);
-    trMIDI.dispatchEvent(new CustomEvent('remoteStateUpdated'));
+    trMIDI.dispatchEvent(new CustomEvent('modeDataRecieved'));
   } else if (modeChangedOnDevice) {
     tritonRemoteUpdater.onModeChanged(data);
-    trMIDI.dispatchEvent(new CustomEvent('remoteStateUpdated'));
+    trMIDI.dispatchEvent(new CustomEvent('RModeChangedOnDevice'));
   } else if (progDataReplay) {
-    console.log('Program Data Replay');
-    console.log(data);
+    tritonRemoteUpdater.onProgDataReplay(data);
+    trMIDI.dispatchEvent(new CustomEvent('programDataReceived'));
   } else if (combiDataReplay) {
-    console.log('Combi data replay');
-    console.log(data);
+    tritonRemoteUpdater.onCombiDataReplay(data);
+    trMIDI.dispatchEvent(new CustomEvent('combiDataReceived'));
   } else if (postProccess) {
-    console.log('Post proccess');
-    console.log(data);
+  } else if (globalDumpReplay) {
+    tritonRemoteUpdater.onGlobalDumpReplay(data);
+    trMIDI.dispatchEvent(new CustomEvent('globalDataReceived'));
   } else {
     console.log('Unkown Message');
     console.log(data);

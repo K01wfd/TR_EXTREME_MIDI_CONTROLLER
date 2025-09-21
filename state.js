@@ -3,6 +3,8 @@ const state = {
     modeText: 'combination',
     modeNumber: 0,
     currentBank: { number: 0, label: 'A' },
+    patchNumber: 0,
+    patchName: 'Initial',
   },
 };
 
@@ -27,6 +29,14 @@ const tritonLocalUpdater = {
     triton.currentBank.number = TRITON_BANKS_LABELS_TO_NUMBERS[bankLabel];
     triton.currentBank.label = TRITON_BANKS_NUMBERS_TO_LABEL[triton.currentBank.number];
   },
+  updatePatchNumber: (patchNumber) => {
+    const { triton } = state;
+    triton.patchNumber = patchNumber;
+  },
+  upadtePatchName: (patchName) => {
+    const { triton } = state;
+    triton.patchName = patchName;
+  },
 };
 
 const tritonRemoteUpdater = {
@@ -42,5 +52,16 @@ const tritonRemoteUpdater = {
     if (data[0] === 176 && data[1] === 32) {
       tritonLocalUpdater.updateBankLabel(data[2]);
     }
+  },
+  onProgDataReplay: (data) => {
+    const patchName = extractPatchName(data);
+    tritonLocalUpdater.upadtePatchName(patchName);
+  },
+  onCombiDataReplay: (data) => {
+    const patchName = extractPatchName(data);
+    tritonLocalUpdater.upadtePatchName(patchName);
+  },
+  onGlobalDumpReplay: (data) => {
+    modifiedGlobal = data;
   },
 };

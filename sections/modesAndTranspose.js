@@ -11,6 +11,13 @@ changeModeButtons.forEach((btn) => {
     changeModeButtons.forEach((btn) => btn.classList.remove('btn-active'));
     if (state.triton.modeText === btn.value) btn.classList.add('btn-active');
     sender.triton.changeMode(btn.value);
-    trMIDI.dispatchEvent(new CustomEvent('localStateUpdated'));
+    setTimeout(() => sender.triton.changeBank(state.triton.currentBank.label), 50);
+    setTimeout(() => sender.triton.requestPatchDeatils(), 100);
+    trMIDI.dispatchEvent(new CustomEvent('localModesUpdated'));
+  });
+});
+transposeButtons.forEach((btn) => {
+  btn.addEventListener('click', (_) => {
+    sender.triton.requestGlobalDump();
   });
 });
