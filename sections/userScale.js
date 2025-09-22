@@ -30,8 +30,17 @@ userScaleButtons.forEach((btn) => {
 
 scalePresetsButtons.forEach((btn) => {
   btn.addEventListener('click', (_) => {
-    scalePresetsButtons.forEach((btn) => btn.classList.remove('btn-active'));
-    btn.classList.toggle('btn-active');
+    const scaleType = btn.value;
+    resetChangeMessages();
+    if (!btn.classList.contains('btn-active')) {
+      scalePresetsButtons.forEach((btn) => btn.classList.remove('btn-active'));
+      btn.classList.add('btn-active');
+      sender.triton.sendScalePreset(scaleType, tunningValue);
+    } else {
+      btn.classList.remove('btn-active');
+      sender.triton.sendZeroTunning();
+    }
+    trMIDI.dispatchEvent(new CustomEvent('presetsUpdated'));
   });
 });
 globalReset.addEventListener('click', (_) => {

@@ -3,8 +3,11 @@ const outputBank = document.getElementById('output-bank');
 const outputPatchName = document.getElementById('output-patch-name');
 const controlls = document.querySelector('.controlls');
 const onReady = (_) => {
-  sender.triton.requestMode();
-  sender.triton.requestPatchDeatils();
+  sender.triton.requestGlobalDump();
+  setTimeout(() => {
+    sender.triton.requestMode();
+    sender.triton.requestPatchDeatils();
+  }, 100);
 };
 
 // Banks Handler
@@ -39,10 +42,10 @@ const globalDataHandler = (_) => {
     const firstPortionNoFlag = firstPortion.slice(1, 8);
     const secondPortionNoFlag = secondPortion.slice(1);
 
-    TRITON_CHANGE_MESSAGES.tunning1 = decode8to7bit(firstPortion);
-    TRITON_CHANGE_MESSAGES.tunning2 = decode8to7bit(secondPortion);
-    TRITON_CHANGE_MESSAGES.readyTunning1 = encode7bitTo8(TRITON_CHANGE_MESSAGES.tunning1);
-    TRITON_CHANGE_MESSAGES.readyTunning2 = encode7bitTo8(TRITON_CHANGE_MESSAGES.tunning2);
+    TRITON_TUNNING_PORTIONS.temp1 = decode8to7bit(firstPortion);
+    TRITON_TUNNING_PORTIONS.temp2 = decode8to7bit(secondPortion);
+    TRITON_TUNNING_PORTIONS.ready1 = encode7bitTo8(TRITON_TUNNING_PORTIONS.temp1);
+    TRITON_TUNNING_PORTIONS.ready2 = encode7bitTo8(TRITON_TUNNING_PORTIONS.temp2);
 
     if (btnPortion === 1) {
       if (firstPortionNoFlag[btnIndex] > 0) {
@@ -57,6 +60,26 @@ const globalDataHandler = (_) => {
   });
 };
 
+const presetUpdateHandler = (_) => {
+  userScaleButtons.forEach((btn) => btn.classList.remove('btn-active'));
+  userScaleButtons.forEach((btn) => {
+    const btnIndex = +btn.dataset.index;
+    const btnPortion = +btn.dataset.portion;
+    const firstPortion = TRITON_TUNNING_PORTIONS.temp1.slice(0);
+    const secondPortion = TRITON_TUNNING_PORTIONS.temp2.slice(0);
+
+    if (btnPortion === 1) {
+      if (firstPortion[btnIndex] !== 0) {
+        btn.classList.add('btn-active');
+      }
+    }
+    if (btnPortion === 2) {
+      if (secondPortion[btnIndex] !== 0) {
+        btn.classList.add('btn-active');
+      }
+    }
+  });
+};
 // Banks Section Updater
 function updateBanksSection(state) {
   if (state.modeNumber === 0) {
@@ -101,13 +124,14 @@ function updatePatchName(state) {
 }
 
 // Listeners
+trMIDI.addEventListener('localModesUpdated', modesHandler);
+trMIDI.addEventListener('presetsUpdated', presetUpdateHandler);
+
 trMIDI.addEventListener('RBankChangedOnKeyboard', banksHandler);
 trMIDI.addEventListener('RModeChangedOnDevice', modesHandler);
 
 trMIDI.addEventListener('ready', onReady);
 trMIDI.addEventListener('modeDataRecieved', modesHandler);
-trMIDI.addEventListener('localModesUpdated', modesHandler);
-trMIDI.addEventListener('presetsUpdated', globalDataHandler);
 trMIDI.addEventListener('programDataReceived', patchNameHandler);
 trMIDI.addEventListener('combiDataReceived', patchNameHandler);
 trMIDI.addEventListener('globalDataReceived', globalDataHandler);

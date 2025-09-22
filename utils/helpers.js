@@ -117,5 +117,5 @@ function parseGlobalDump(dump) {
 }
 
 function resetChangeMessages() {
-  TRITON_CHANGE_MESSAGES = Object.assign({}, TRITON_CHANGE_MESSAGES_DEFAULT);
+  TRITON_TUNNING_PORTIONS = JSON.parse(JSON.stringify(TRITON_TUNNING_PORTIONS_DEFAULT));
 }
