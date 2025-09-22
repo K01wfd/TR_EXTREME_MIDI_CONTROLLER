@@ -34,10 +34,11 @@ class tritonMIDI extends EventTarget {
         this.#input = input;
         input.onmidimessage = (msg) => this.#handleMIDIMessage(msg);
       });
-
+      alert('✅ MIDI IS SUPPORTED ✅');
       // Notify when ready
       this.dispatchEvent(new CustomEvent('ready'));
     } catch (err) {
+      alert('MIDI NOT SUPPORTED 🚫');
       console.error('❌ Error accessing MIDI:', err);
     }
   }
