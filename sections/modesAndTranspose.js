@@ -18,6 +18,22 @@ changeModeButtons.forEach((btn) => {
 });
 transposeButtons.forEach((btn) => {
   btn.addEventListener('click', (_) => {
-    sender.triton.requestGlobalDump();
+    const btnType = btn.id === 'transpose+' ? '+' : '-';
+
+    if (btnType === '+' && currentTransposeValue < 12) {
+      currentTransposeValue++;
+      transposeValue.textContent = currentTransposeValue;
+      if (currentTransposeValue > 0) btn.classList.add('btn-active');
+      sender.triton.sendTranspose(currentTransposeValue + 64);
+      updateTranspInGlob(currentTransposeValue);
+    } else if (btnType === '-' && currentTransposeValue > -12) {
+      currentTransposeValue--;
+      transposeValue.textContent = currentTransposeValue;
+      if (currentTransposeValue < 0) btn.classList.add('btn-active');
+      updateTranspInGlob(currentTransposeValue);
+      sender.triton.sendTranspose(currentTransposeValue + 64);
+    }
+
+    if (currentTransposeValue === 0) transposeButtons.forEach((btn) => btn.classList.remove('btn-active'));
   });
 });

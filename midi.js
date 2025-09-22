@@ -14,6 +14,7 @@ class tritonMIDI extends EventTarget {
   }
 
   sendMessage(data) {
+    if (!this.#output) throw Error('Error sending message, no output');
     this.execCounter++;
     if (!this.#output) throw new Error('Error sending data, no output');
     this.#output.send(data);
@@ -39,7 +40,6 @@ class tritonMIDI extends EventTarget {
     } catch (err) {
       console.error('❌ Error accessing MIDI:', err);
     }
-    this.dispatchEvent(new CustomEvent('stateReady'));
   }
 
   #handleMIDIMessage(message) {

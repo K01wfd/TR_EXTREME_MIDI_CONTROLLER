@@ -80,6 +80,7 @@ const presetUpdateHandler = (_) => {
     }
   });
 };
+
 // Banks Section Updater
 function updateBanksSection(state) {
   if (state.modeNumber === 0) {
@@ -123,19 +124,6 @@ function updatePatchName(state) {
   outputPatchName.textContent = patchName;
 }
 
-// Listeners
-trMIDI.addEventListener('localModesUpdated', modesHandler);
-trMIDI.addEventListener('presetsUpdated', presetUpdateHandler);
-
-trMIDI.addEventListener('RBankChangedOnKeyboard', banksHandler);
-trMIDI.addEventListener('RModeChangedOnDevice', modesHandler);
-
-trMIDI.addEventListener('ready', onReady);
-trMIDI.addEventListener('modeDataRecieved', modesHandler);
-trMIDI.addEventListener('programDataReceived', patchNameHandler);
-trMIDI.addEventListener('combiDataReceived', patchNameHandler);
-trMIDI.addEventListener('globalDataReceived', globalDataHandler);
-
 // Toggle between userscale buttons and other sections
 let sectionState = 'userscale';
 const toggler = document.getElementById('toggler');
@@ -160,3 +148,16 @@ document.addEventListener(
   },
   { passive: false }
 );
+
+// Listeners
+trMIDI.addEventListener('localModesUpdated', modesHandler);
+trMIDI.addEventListener('presetsUpdated', presetUpdateHandler);
+
+trMIDI.addEventListener('RBankChangedOnKeyboard', banksHandler);
+trMIDI.addEventListener('RModeChangedOnDevice', modesHandler);
+
+trMIDI.addEventListener('ready', onReady);
+trMIDI.addEventListener('modeDataRecieved', modesHandler);
+trMIDI.addEventListener('programDataReceived', patchNameHandler);
+trMIDI.addEventListener('combiDataReceived', patchNameHandler);
+trMIDI.addEventListener('globalDataReceived', globalDataHandler);

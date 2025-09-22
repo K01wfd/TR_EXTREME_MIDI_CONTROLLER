@@ -102,6 +102,11 @@ const sender = {
       modifiedGlobal = [...combined];
       trMIDI.sendMessage(modifiedGlobal);
     },
+    sendTranspose: function (transposeValue) {
+      const convertedValue = '0x' + toHex7bit(transposeValue);
+      const msg = [0xf0, 0x7f, 0x00, 0x04, 0x04, 0x00, convertedValue, 0xf7];
+      trMIDI.sendMessage(msg);
+    },
   },
 };
 

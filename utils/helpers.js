@@ -119,3 +119,13 @@ function parseGlobalDump(dump) {
 function resetChangeMessages() {
   TRITON_TUNNING_PORTIONS = JSON.parse(JSON.stringify(TRITON_TUNNING_PORTIONS_DEFAULT));
 }
+
+function updateTranspInGlob(transposeValue) {
+  const dumpHeader = modifiedGlobal.slice(0, 6);
+  const dumpTail = modifiedGlobal.slice(14);
+  TRITON_TRANSPOSE_PORTION_TEMP[1] = transposeValue;
+  TRITON_TRANSPOSE_PORTION = encode7bitTo8(TRITON_TRANSPOSE_PORTION_TEMP);
+
+  const combined = [...dumpHeader, ...TRITON_TRANSPOSE_PORTION, ...dumpTail];
+  modifiedGlobal = [...combined];
+}
