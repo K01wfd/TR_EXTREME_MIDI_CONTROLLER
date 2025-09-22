@@ -147,6 +147,7 @@ button:active {
   }
 }
 .userScale-top {
+  margin-top: 1rem;
   display: flex;
   align-items: center;
   gap: 4rem;
@@ -165,6 +166,18 @@ button:active {
   justify-content: center;
   button {
     padding: 1.6rem;
+  }
+}
+
+.scale-presets {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  button {
+    background: #fdfdfd;
+    color: #121212;
   }
 }
 

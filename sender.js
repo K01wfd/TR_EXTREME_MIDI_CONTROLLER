@@ -35,6 +35,7 @@ const sender = {
     },
     sendScaleTunning: function (index, value, portionNum) {
       const dumpHeader = modifiedGlobal.slice(0, 14);
+      const dumpTail = modifiedGlobal.slice(30);
       if (portionNum === 1) {
         TRITON_CHANGE_MESSAGES.tunning1[index] = value;
         TRITON_CHANGE_MESSAGES.readyTunning1 = encode7bitTo8(TRITON_CHANGE_MESSAGES.tunning1);
@@ -44,13 +45,54 @@ const sender = {
       }
 
       const tunningBody = [...TRITON_CHANGE_MESSAGES.readyTunning1, ...TRITON_CHANGE_MESSAGES.readyTunning2];
-      const dumpTail = modifiedGlobal.slice(30);
       const combined = [...dumpHeader, ...tunningBody, ...dumpTail];
+
       modifiedGlobal = combined;
       trMIDI.sendMessage(combined);
     },
     resetGlobal: function () {
       trMIDI.sendMessage(defaultGlobal);
+    },
+    sendScalePreset: function (scaleType, tunningValue) {
+      const dumpHeader = modifiedGlobal.slice(0, 14);
+      const dumpTail = modifiedGlobal.slice(30);
+      switch (scaleType) {
+        case 'BC': {
+          TRITON_CHANGE_MESSAGES.tunning1[3] = tunningValue;
+          TRITON_CHANGE_MESSAGES.readyTunning1 = encode7bitTo8(TRITON_CHANGE_MESSAGES.tunning1);
+          TRITON_CHANGE_MESSAGES.tunning2[3] = tunningValue;
+          TRITON_CHANGE_MESSAGES.readyTunning2 = encode7bitTo8(TRITON_CHANGE_MESSAGES.tunning2);
+          break;
+        }
+        case 'BD': {
+          TRITON_CHANGE_MESSAGES.tunning1[5] = tunningValue;
+          TRITON_CHANGE_MESSAGES.readyTunning1 = encode7bitTo8(TRITON_CHANGE_MESSAGES.tunning1);
+          TRITON_CHANGE_MESSAGES.tunning2[5] = tunningValue;
+          TRITON_CHANGE_MESSAGES.readyTunning2 = encode7bitTo8(TRITON_CHANGE_MESSAGES.tunning2);
+          break;
+        }
+        case 'BG': {
+          TRITON_CHANGE_MESSAGES.tunning1[5] = tunningValue;
+          TRITON_CHANGE_MESSAGES.readyTunning1 = encode7bitTo8(TRITON_CHANGE_MESSAGES.tunning1);
+          TRITON_CHANGE_MESSAGES.tunning2[3] = tunningValue;
+          TRITON_CHANGE_MESSAGES.readyTunning2 = encode7bitTo8(TRITON_CHANGE_MESSAGES.tunning2);
+          break;
+        }
+        case 'BA': {
+          TRITON_CHANGE_MESSAGES.tunning2[0] = tunningValue;
+          TRITON_CHANGE_MESSAGES.readyTunning2 = encode7bitTo8(TRITON_CHANGE_MESSAGES.tunning2);
+          TRITON_CHANGE_MESSAGES.tunning2[5] = tunningValue;
+          TRITON_CHANGE_MESSAGES.readyTunning2 = encode7bitTo8(TRITON_CHANGE_MESSAGES.tunning2);
+          break;
+        }
+        default:
+          return;
+      }
+
+      const tunningBody = [...TRITON_CHANGE_MESSAGES.readyTunning1, ...TRITON_CHANGE_MESSAGES.readyTunning2];
+      const combined = [...dumpHeader, ...tunningBody, ...dumpTail];
+      modifiedGlobal = [...combined];
+      trMIDI.sendMessage(modifiedGlobal);
     },
   },
 };

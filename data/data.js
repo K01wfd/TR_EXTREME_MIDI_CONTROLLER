@@ -5,7 +5,7 @@ const TRITON_REQUEST_MESSAGES = {
   combiRequest: [0xf0, 0x42, 0x30, 0x50, 0x19, 0x00, 0xf7],
 };
 
-const TRITON_CHANGE_MESSAGES = {
+let TRITON_CHANGE_MESSAGES = {
   modeChange: function () {
     const msg = [0xf0, 0x42, 0x30, 0x50, 0x4e, 0x00, 0xf7];
     return [5, msg];

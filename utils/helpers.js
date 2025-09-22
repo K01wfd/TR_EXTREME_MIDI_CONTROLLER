@@ -103,7 +103,6 @@ function decode8to7bit(block) {
   return values;
 }
 
-console.log(decode8to7bit([8, 0, 0, 0, 78, 0, 0, 0]));
 function parseGlobalDump(dump) {
   if (!Array.isArray(dump)) {
     throw new Error('Dump must be an array of numbers');
@@ -115,4 +114,8 @@ function parseGlobalDump(dump) {
     tuning: dump.slice(14, 30), // bytes 14–29
     tail: dump[30], // byte 31
   };
+}
+
+function resetChangeMessages() {
+  TRITON_CHANGE_MESSAGES = Object.assign({}, TRITON_CHANGE_MESSAGES_DEFAULT);
 }

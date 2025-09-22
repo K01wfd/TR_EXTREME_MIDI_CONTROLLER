@@ -3,6 +3,7 @@ const userScaleButtons = document.querySelectorAll('[data-id="userscale-btn"]');
 const tunningRange = document.getElementById('tunning-range');
 const tunningRangeValue = document.getElementById('tunning-range-value');
 const globalReset = document.getElementById('reset-global');
+const scalePresetsButtons = document.querySelectorAll('[data-id="scale-preset-btn"]');
 
 let tunningValue = +tunningRangeValue.textContent;
 tunningRange.addEventListener('input', (e) => {
@@ -27,8 +28,15 @@ userScaleButtons.forEach((btn) => {
   });
 });
 
+scalePresetsButtons.forEach((btn) => {
+  btn.addEventListener('click', (_) => {
+    scalePresetsButtons.forEach((btn) => btn.classList.remove('btn-active'));
+    btn.classList.toggle('btn-active');
+  });
+});
 globalReset.addEventListener('click', (_) => {
   userScaleButtons.forEach((btn) => btn.classList.remove('btn-active'));
-  Object.assign(TRITON_CHANGE_MESSAGES, TRITON_CHANGE_MESSAGES_DEFAULT);
+  tritonLocalUpdater.resetLocalGlobal();
+  resetChangeMessages();
   sender.triton.resetGlobal();
 });

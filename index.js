@@ -1,7 +1,7 @@
 const outputMode = document.getElementById('output-mode');
 const outputBank = document.getElementById('output-bank');
 const outputPatchName = document.getElementById('output-patch-name');
-
+const controlls = document.querySelector('.controlls');
 const onReady = (_) => {
   sender.triton.requestMode();
   sender.triton.requestPatchDeatils();
@@ -29,6 +29,7 @@ const patchNameHandler = (_) => {
 // User scale buttons handler
 const globalDataHandler = (_) => {
   const { tuning } = parseGlobalDump(modifiedGlobal);
+  userScaleButtons.forEach((btn) => btn.classList.remove('btn-active'));
   userScaleButtons.forEach((btn) => {
     const btnIndex = +btn.dataset.index;
     const btnPortion = +btn.dataset.portion;
@@ -106,29 +107,24 @@ trMIDI.addEventListener('RModeChangedOnDevice', modesHandler);
 trMIDI.addEventListener('ready', onReady);
 trMIDI.addEventListener('modeDataRecieved', modesHandler);
 trMIDI.addEventListener('localModesUpdated', modesHandler);
+trMIDI.addEventListener('presetsUpdated', globalDataHandler);
 trMIDI.addEventListener('programDataReceived', patchNameHandler);
 trMIDI.addEventListener('combiDataReceived', patchNameHandler);
 trMIDI.addEventListener('globalDataReceived', globalDataHandler);
 
 // Toggle between userscale buttons and other sections
-let sectionState = 'pads';
+let sectionState = 'userscale';
 const toggler = document.getElementById('toggler');
 toggler.addEventListener('click', (_) => {
-  if (sectionState === 'pads') {
-    programChangePadsContainer.style.display = 'none';
-    progBanksContainer.style.display = 'none';
-    combiBanksContainer.style.display = 'none';
+  if (sectionState === 'controlls') {
+    controlls.style.display = 'none';
     userScaleContainer.style.display = 'flex';
     sectionState = 'userscale';
-    toggler.textContent = 'Pads';
+    toggler.textContent = 'Controlls';
   } else {
-    programChangePadsContainer.style.display = 'flex';
-    state.triton.modeNumber === 0
-      ? (combiBanksContainer.style.display = 'flex')
-      : (progBanksContainer.style.display = 'flex');
-
+    controlls.style.display = 'block';
     userScaleContainer.style.display = 'none';
-    sectionState = 'pads';
+    sectionState = 'controlls';
     toggler.textContent = 'User Scale';
   }
 });

@@ -37,6 +37,9 @@ const tritonLocalUpdater = {
     const { triton } = state;
     triton.patchName = patchName;
   },
+  resetLocalGlobal: () => {
+    modifiedGlobal = defaultGlobal;
+  },
 };
 
 const tritonRemoteUpdater = {
