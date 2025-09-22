@@ -22,6 +22,7 @@ progBanksButtons.forEach((btn) => {
     }
   });
 });
+
 combiBanksButtons.forEach((btn) => {
   if (btn.dataset.label === state.triton.currentBank.label) {
     btn.classList.add('btn-active');

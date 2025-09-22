@@ -5,9 +5,10 @@ const controlls = document.querySelector('.controlls');
 const onReady = (_) => {
   sender.triton.requestGlobalDump();
   setTimeout(() => {
+    sender.triton.changeMode(0);
     sender.triton.requestMode();
     sender.triton.requestPatchDeatils();
-  }, 100);
+  }, 500);
 };
 
 // Banks Handler
@@ -125,7 +126,7 @@ function updatePatchName(state) {
 }
 
 // Toggle between userscale buttons and other sections
-let sectionState = 'userscale';
+let sectionState = 'controlls';
 const toggler = document.getElementById('toggler');
 toggler.addEventListener('click', (_) => {
   if (sectionState === 'controlls') {

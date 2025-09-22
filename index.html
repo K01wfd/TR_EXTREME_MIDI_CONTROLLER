@@ -14,9 +14,9 @@
         </div>
         <div class="temp-patch-number" style="display: none"></div>
       </div>
-      <button id="toggler">Controlls</button>
+      <button id="toggler">User Scale</button>
       <!-- MODES AND TRANSPOSE -->
-      <div class="controlls" style="display: none">
+      <div class="controlls">
         <div class="devider"></div>
         <div class="actions">
           <div class="change-mode">
@@ -166,7 +166,7 @@
       </div>
 
       <!-- USERSCALE -->
-      <div class="userScale">
+      <div class="userScale" style="display: none">
         <div class="tunning-range">
           <input type="range" id="tunning-range" min="-99" max="99" value="-50" step="1" />
           <span id="tunning-range-value">-50</span>
@@ -199,6 +199,7 @@
           <button data-id="scale-preset-btn" value="BA">Bayat A</button>
         </div>
       </div>
+      <div id="copyright"></div>
     </div>
     <script src="utils/helpers.js"></script>
 

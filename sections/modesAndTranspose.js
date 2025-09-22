@@ -16,6 +16,7 @@ changeModeButtons.forEach((btn) => {
     trMIDI.dispatchEvent(new CustomEvent('localModesUpdated'));
   });
 });
+
 transposeButtons.forEach((btn) => {
   btn.addEventListener('click', (_) => {
     const btnType = btn.id === 'transpose+' ? '+' : '-';
